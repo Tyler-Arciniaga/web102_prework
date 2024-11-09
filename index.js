@@ -51,7 +51,7 @@ function addGamesToPage(games) {
             <h1> ${game.name}</h1>
             <p1> ${game.description}
             <br> <br>
-            Pledged: ${game.pledged}</p1>
+            Pledged: ${game.pledged.toLocaleString('en-US')}</p1>
             
         `
 
@@ -176,7 +176,7 @@ function unfunded_stats_mode(){
     },0);
 
     gamesCard.innerHTML = `<p1> ${num_unfunded} <p1>`
-    contributionsCard.innerHTML = `<p1> ${unfunded_cont} <p1>`
+    contributionsCard.innerHTML = `<p1> ${unfunded_cont.toLocaleString('en-US')} <p1>`
     raisedCard.innerHTML = `<p1> $${unfunded_raised.toLocaleString('en-US')} <p1>`
 
 }
@@ -203,7 +203,7 @@ function funded_stats_mode(){
     },0);
 
     gamesCard.innerHTML = `<p1> ${num_funded} <p1>`
-    contributionsCard.innerHTML = `<p1> ${funded_cont} <p1>`
+    contributionsCard.innerHTML = `<p1> ${funded_cont.toLocaleString('en-US')} <p1>`
     raisedCard.innerHTML = `<p1> $${funded_raised.toLocaleString('en-US')} <p1>`
 
 }
@@ -302,3 +302,19 @@ firstGameContainer.appendChild(top_pledge_game);
 let second_pledge_game = document.createElement("p");
 second_pledge_game.innerHTML = `<p1> ${second_game.name} </p1>`;
 secondGameContainer.appendChild(second_pledge_game);
+
+function filter_by_search(){
+    console.log("Search triggered");
+    const user_search = document.getElementById("game-search").value;
+
+    let filtered_games = GAMES_JSON.filter((game) =>{
+        return game.name.includes(user_search);
+    }, 0);
+
+    deleteChildElements(gamesContainer);
+
+    
+    addGamesToPage(filtered_games)
+}
+
+document.getElementById("game-search").addEventListener('input', filter_by_search);
