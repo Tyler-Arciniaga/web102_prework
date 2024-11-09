@@ -25,13 +25,12 @@ The following **optional** features are implemented:
 ## Video Walkthrough
 
 Here's a walkthrough of implemented features:
+![web102_prework_tyler_arciniaga](https://github.com/Tyler-Arciniaga/web102_prework/raw/main/web102_prework_tyler_arciniaga.gif)
 
-<img src='https://imgur.com/a/L2A393i](https://github.com/Tyler-Arciniaga/web102_prework/blob/main/web102_prework_tyler_arciniaga.gif?raw=true' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-![web102_prework_tyler_arciniaga](https://github.com/user-attachments/assets/caafc5bf-567b-4931-971c-56eadc8aa8fa)
 
 
 <!-- Replace this with whatever GIF tool you used! -->
-GIF created with LiceCAP and imgur
+GIF created with LiceCAP
 <!-- Recommended tools:
 [Kap](https://getkap.co/) for macOS
 [ScreenToGif](https://www.screentogif.com/) for Windows
