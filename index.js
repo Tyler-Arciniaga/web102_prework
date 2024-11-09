@@ -171,13 +171,70 @@ function unfunded_stats_mode(){
         return total + game.backers;
     },0);
 
+    let unfunded_raised = list_of_underfunded.reduce((total,game)=>{
+        return total + game.pledged;
+    },0);
+
     gamesCard.innerHTML = `<p1> ${num_unfunded} <p1>`
     contributionsCard.innerHTML = `<p1> ${unfunded_cont} <p1>`
+    raisedCard.innerHTML = `<p1> $${unfunded_raised.toLocaleString('en-US')} <p1>`
+
 }
 
 function funded_stats_mode(){
+    filterFundedOnly();
+    let num_funded = GAMES_JSON.reduce((total,game)=>{
+        if (game.pledged >= game.goal){
+            return total + 1;
+        }
+        return total;
+    },0);
+
+    let list_of_funded = GAMES_JSON.filter((game) =>{
+        return game.pledged >= game.goal;
+    },0);
+
+    let funded_cont = list_of_funded.reduce((total,game)=>{
+        return total + game.backers;
+    },0);
+
+    let funded_raised = list_of_funded.reduce((total,game)=>{
+        return total + game.pledged;
+    },0);
+
+    gamesCard.innerHTML = `<p1> ${num_funded} <p1>`
+    contributionsCard.innerHTML = `<p1> ${funded_cont} <p1>`
+    raisedCard.innerHTML = `<p1> $${funded_raised.toLocaleString('en-US')} <p1>`
 
 }
+
+function all_stats_mode(){
+    showAllGames();
+
+// use reduce() to count the number of total contributions by summing the backers
+const total_contributions = GAMES_JSON.reduce((total,game)=>{
+    return total + game.backers;
+}, 0);
+
+// set the inner HTML using a template literal and toLocaleString to get a number with commas
+contributionsCard.innerHTML = `
+<p1> ${total_contributions.toLocaleString('en-US')} </p1>`;
+
+const total_raised = GAMES_JSON.reduce((total,game) => {
+    return total + game.pledged;
+},0);
+
+raisedCard.innerHTML = `
+<p1>$${total_raised.toLocaleString('en-US')} </p1>`;
+
+const total_games = GAMES_JSON.reduce((total) => {
+    return total + 1;
+},0);
+gamesCard.innerHTML = `
+<p1>${total_games}</p1>`;
+
+}
+
 
 // select each button in the "Our Games" section
 const unfundedBtn = document.getElementById("unfunded-btn");
@@ -186,8 +243,8 @@ const allBtn = document.getElementById("all-btn");
 
 // add event listeners with the correct functions to each button
 unfundedBtn.addEventListener('click',unfunded_stats_mode);
-fundedBtn.addEventListener("click",filterFundedOnly);
-allBtn.addEventListener("click",showAllGames);
+fundedBtn.addEventListener("click",funded_stats_mode);
+allBtn.addEventListener("click",all_stats_mode);
 
 
 /*************************************************************************************
